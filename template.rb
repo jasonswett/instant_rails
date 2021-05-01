@@ -18,6 +18,27 @@ initializer 'generators.rb', <<-CODE
   end
 CODE
 
+gem "devise"
+
+inject_into_file "app/views/layouts/application.html.erb", after: /<body>/ do
+  <<-HTML
+
+    <% if user_signed_in? %>
+      <div class="text-right">
+        <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'text-right' %>
+      </div>
+    <% else %>
+      <div class="text-right">
+        <%= link_to 'Sign In', new_user_session_path %>
+      </div>
+    <% end %>
+  HTML
+end
+
 after_bundle do
   generate 'rspec:install'
+
+  generate "devise:install"
+  environment "config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }", env: "development"
+  generate :devise, "User"
 end
