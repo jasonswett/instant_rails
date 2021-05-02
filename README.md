@@ -14,3 +14,17 @@ Next, start PostgreSQL and Redis by running `docker-compose up`.
 ```bash
 $ docker-compose up
 ```
+
+Then run `bin/setup` to finish the initialization.
+
+```bash
+$ bin/setup
+```
+
+Lastly, start your Rails server and proceed as normal.
+
+```
+$ rails server
+```
+
+You're reading to start coding!
