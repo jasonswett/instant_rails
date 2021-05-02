@@ -14,15 +14,15 @@ services:
     environment:
       PSQL_HISTFILE: /root/log/.psql_history
       POSTGRES_USER: my_app
-      POSTGRES_PASSWORD:
+      POSTGRES_HOST_AUTH_METHOD: trust
     restart: on-failure
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 2s
       retries: 10
-    logging:
-      driver: none
+#    logging:
+#      driver: none
 
   redis:
     image: redis:4.0.14-alpine
