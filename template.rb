@@ -10,18 +10,6 @@ gem_group :development, :test do
   gem 'faker'
 end
 
-initializer 'generators.rb', <<-CODE
-  Rails.application.config.generators do |g|
-    g.test_framework :rspec,
-      fixtures:         false,
-      view_specs:       false,
-      helper_specs:     false,
-      routing_specs:    false,
-      request_specs:    false,
-      controller_specs: false
-  end
-CODE
-
 gem "devise"
 
 inject_into_file "app/views/layouts/application.html.erb", after: /<body>/ do
@@ -40,6 +28,7 @@ inject_into_file "app/views/layouts/application.html.erb", after: /<body>/ do
 end
 
 [
+  "bin/setup",
   "docker-compose.yml",
   "config/database.yml",
 
@@ -52,11 +41,10 @@ end
 end
 
 route "root to: 'static_pages#home'"
+directory "post_templates", "post_templates"
 
 after_bundle do
   run 'bin/spring stop'
-  generate 'rspec:install'
-
   generate "devise:install"
   environment "config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }", env: "development"
   generate :devise, "User"
