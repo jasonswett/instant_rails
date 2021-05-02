@@ -1,3 +1,7 @@
+def source_paths
+  [__dir__]
+end
+
 gem_group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
@@ -35,7 +39,10 @@ inject_into_file "app/views/layouts/application.html.erb", after: /<body>/ do
   HTML
 end
 
+copy_file "docker-compose.yml", "docker-compose.yml"
+
 after_bundle do
+  run 'bin/spring stop'
   generate 'rspec:install'
 
   generate "devise:install"
