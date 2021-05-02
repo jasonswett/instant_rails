@@ -27,10 +27,11 @@ inject_into_file "app/views/layouts/application.html.erb", after: /<body>/ do
   HTML
 end
 
+template "config/database.yml.tt", "config/database.yml", force: true
+template "docker-compose.yml.tt", "docker-compose.yml", force: true
+
 [
   "bin/setup",
-  "docker-compose.yml",
-  "config/database.yml",
 
   # Static pages
   "app/controllers/static_pages_controller.rb",
