@@ -39,8 +39,19 @@ inject_into_file "app/views/layouts/application.html.erb", after: /<body>/ do
   HTML
 end
 
-copy_file "docker-compose.yml", "docker-compose.yml"
-copy_file "database.yml", "config/database.yml", force: true
+[
+  "docker-compose.yml",
+  "config/database.yml",
+
+  # Static pages
+  "app/controllers/static_pages_controller.rb",
+  "app/views/static_pages/home.html.erb",
+
+].each do |file_path|
+  copy_file file_path, file_path, force: true
+end
+
+route "root to: 'static_pages#home'"
 
 after_bundle do
   run 'bin/spring stop'
