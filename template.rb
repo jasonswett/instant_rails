@@ -40,6 +40,9 @@ inject_into_file "app/views/layouts/application.html.erb", after: /<body>/ do
 end
 
 copy_file "docker-compose.yml", "docker-compose.yml"
+uncomment_lines "config/database.yml", /username:/
+uncomment_lines "config/database.yml", /host:/
+uncomment_lines "config/database.yml", /password:/
 
 after_bundle do
   run 'bin/spring stop'
