@@ -3,6 +3,11 @@
 First, run the following command to initialize your Rails application.
 
 ```bash
+rails new my_app -T -d postgresql -m rails_application_template/template.rb
+```
+Explanation of flags:
+
+```bash
 rails new my_app \
 -T \                                      # Skip Minitest
 -d postgresql \                           # Use PostgreSQL as the RDBMS
