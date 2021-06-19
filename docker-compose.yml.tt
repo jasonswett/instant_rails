@@ -1,7 +1,36 @@
 ---
-# Docker Compose 2.4 is for local development
-# https://www.heroku.com/podcasts/codeish/57-discussing-docker-containers-and-kubernetes-with-a-docker-captain - Source on that.
 version: '2.4'
+
+x-app: &app
+  image: <%= @app_name %>
+  build:
+    context: .
+    dockerfile: Dockerfile
+  tmpfs:
+    - /tmp
+  environment:
+    RAILS_LOG_TO_STDOUT: enabled
+    REDIS_URL: redis://@redis:6379/1
+    DATABASE_URL: postgres://<%= @app_name %>_development@postgres:5432/
+    WEBPACKER_DEV_SERVER_HOST: webpacker
+    BOOTSNAP_CACHE_DIR: /usr/src/bootsnap
+    PSQL_HISTFILE: /usr/src/app/log/.psql_history
+    POSTGRES_USER: <%= @app_name %>_development
+    POSTGRES_HOST_AUTH_METHOD: trust
+  volumes:
+    - .:/usr/src/app:cached
+    - bundler:/usr/local/bundle:delegated
+    - bootsnap_cache:/usr/src/bootsnap:delegated
+    - rails_cache:/usr/src/app/tmp/cache:delegated
+    - packs:/usr/src/app/public/packs:delegated
+    - node_modules:/usr/src/app/node_modules:delegated
+    - storage:/usr/src/app/storage:delegated
+    - ~/.ssh:/root/.ssh
+  depends_on:
+    postgres:
+      condition: service_healthy
+    redis:
+      condition: service_started
 
 services:
   postgres:
@@ -10,11 +39,11 @@ services:
     volumes:
       - postgresql:/var/lib/postgresql/data:delegated
     ports:
-      - "127.0.0.1:5432:5432"
+      - "127.0.0.1:5433:5432"
     environment:
       PSQL_HISTFILE: /root/log/.psql_history
-      POSTGRES_USER: <%= @app_name %>
-      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: app_development
+      POSTGRES_PASSWORD: pgpassword
     restart: on-failure
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
@@ -26,7 +55,6 @@ services:
 
   redis:
     image: redis:4.0.14-alpine
-    mem_limit: 64m
     volumes:
       - redis:/data:delegated
     ports:
@@ -35,7 +63,26 @@ services:
     logging:
       driver: none
 
+  web:
+    <<: *app
+    command: bash -c "rm -rf /usr/src/app/tmp/pids/server.pid && bundle exec rails s -p 3001 -b '0.0.0.0'"
+    ports:
+      - "127.0.0.1:${PORT:-3001}:3001"
+
+  webpacker:
+    <<: *app
+    command: ./bin/webpack-dev-server
+    environment:
+      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
+    ports:
+      - "127.0.0.1:3036:3035"
+
 volumes:
   postgresql:
   redis:
+  bundler:
+  bootsnap_cache:
+  rails_cache:
+  packs:
+  node_modules:
   storage:
