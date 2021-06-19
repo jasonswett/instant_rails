@@ -20,12 +20,6 @@ ENV INSTALL_PATH /usr/src/app
 RUN mkdir -p $INSTALL_PATH
 WORKDIR $INSTALL_PATH
 
-RUN gem install rails
-
-COPY template template
-RUN rails new my_app -T -d postgresql -m template/template.rb
-WORKDIR $INSTALL_PATH/my_app
-
 RUN bundle install
 RUN yarn install --check-files
 
