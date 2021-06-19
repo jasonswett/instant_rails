@@ -51,6 +51,9 @@ directory "post_templates", "post_templates"
 # Skip bundle install
 def run_bundle; end
 
+# Skip yarn install
+def run_webpack; end
+
 #after_bundle do
 #  run 'bin/spring stop'
 #  generate "devise:install"

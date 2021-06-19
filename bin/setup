@@ -13,5 +13,6 @@ FileUtils.chdir APP_ROOT do
   # This script is idempotent, so that you can run it at any time and get an expectable outcome.
   # Add necessary setup steps to this file.
 
-  system! 'bin/rails app:template LOCATION=post_templates/rspec/template.rb'
+#  system! 'bin/rails app:template LOCATION=post_templates/rspec/template.rb'
+  system! 'docker compose build'
 end
