@@ -50,10 +50,3 @@ def run_bundle; end
 
 # Skip yarn install
 def run_webpack; end
-
-#after_bundle do
-#  run 'bin/spring stop'
-#  generate "devise:install"
-#  environment "config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }", env: "development"
-#  generate :devise, "User"
-#end

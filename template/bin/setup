@@ -9,10 +9,12 @@ def system!(*args)
 end
 
 FileUtils.chdir APP_ROOT do
-  # This script is a way to set up or update your development environment automatically.
-  # This script is idempotent, so that you can run it at any time and get an expectable outcome.
-  # Add necessary setup steps to this file.
-
-#  system! 'bin/rails app:template LOCATION=post_templates/rspec/template.rb'
+  system! "bundle install"
   system! "bin/rails webpacker:install"
+
+  system! 'bin/rails app:template LOCATION=template/post_templates/devise/template.rb'
+  system! 'bin/rails app:template LOCATION=template/post_templates/rspec/template.rb'
+
+  system! "bin/rails db:create"
+  system! "bin/rails db:migrate"
 end
