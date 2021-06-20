@@ -2,7 +2,7 @@
 version: '2.4'
 
 x-app: &app
-  image: my_app
+  image: ${app_name}
   build:
     context: .
     dockerfile: Dockerfile
@@ -11,12 +11,9 @@ x-app: &app
   environment:
     RAILS_LOG_TO_STDOUT: enabled
     REDIS_URL: redis://@redis:6379/1
-    DATABASE_URL: postgres://my_app@postgres:5432/
+    DATABASE_URL: postgres://${app_name}@postgres:5432/
     WEBPACKER_DEV_SERVER_HOST: webpacker
     BOOTSNAP_CACHE_DIR: /usr/src/bootsnap
-    PSQL_HISTFILE: /usr/src/app/log/.psql_history
-    POSTGRES_USER: my_app
-    POSTGRES_HOST_AUTH_METHOD: trust
   volumes:
     - .:/usr/src/app:cached
     - bundler:/usr/local/bundle:delegated
@@ -42,9 +39,9 @@ services:
     ports:
       - "127.0.0.1:5432:5432"
     environment:
-      PSQL_HISTFILE: /root/log/.psql_history
-      POSTGRES_USER: app_development
-      POSTGRES_PASSWORD: pgpassword
+      PSQL_HISTFILE: /usr/src/app/log/.psql_history
+      POSTGRES_USER: ${app_name}
+      POSTGRES_HOST_AUTH_METHOD: trust
     restart: on-failure
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]

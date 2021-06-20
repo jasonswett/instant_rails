@@ -1,1 +1,1 @@
-CREATE USER my_app;
+CREATE USER ${app_name};
