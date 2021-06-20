@@ -16,6 +16,12 @@ fill_template init.sql
 
 cp -R ../template template
 
-docker compose run web rails new . -f -T -d postgresql -m template/template.rb
+docker compose run web rails new . \
+  -f \
+  -T \
+  -d postgresql \
+  -m template/template.rb
+
+docker compose run web bin/setup
 
 #sudo chown -R $USER .

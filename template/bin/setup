@@ -14,5 +14,5 @@ FileUtils.chdir APP_ROOT do
   # Add necessary setup steps to this file.
 
 #  system! 'bin/rails app:template LOCATION=post_templates/rspec/template.rb'
-#  system! 'docker compose build'
+  system! "bin/rails webpacker:install"
 end
