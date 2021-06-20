@@ -21,19 +21,3 @@ RUN mkdir -p $INSTALL_PATH
 WORKDIR $INSTALL_PATH
 
 RUN gem install rails
-
-#COPY ../template template
-#RUN mkdir my_app
-#WORKDIR my_app
-#RUN rails new . -T -d postgresql -m ../template/template.rb
-
-#RUN bundle install
-#RUN yarn install --check-files
-
-# Precompile the assets
-#RUN RAILS_SERVE_STATIC_FILES=enabled SECRET_KEY_BASE=secret-key-base RAILS_ENV=production RACK_ENV=production NODE_ENV=production bundle exec rake assets:precompile
-
-# Precompile Bootsnap
-#run RAILS_SERVE_STATIC_FILES=enabled SECRET_KEY_BASE=secret-key-base RAILS_ENV=production RACK_ENV=production NODE_ENV=production bundle exec bootsnap precompile --gemfile app/ lib/
-
-#RUN bundle exec rake assets:precompile
