@@ -23,5 +23,4 @@ docker compose run web rails new . \
   -m template/template.rb
 
 docker compose run web bin/setup
-
-#sudo chown -R $USER .
+docker compose up
