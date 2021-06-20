@@ -4,5 +4,7 @@ cd my_app
 
 cp ../Dockerfile .
 cp ../docker-compose.yml .
+cp -R ../template template
 
-docker compose run web rails new . -f -d postgresql 
+docker compose run web rails new . -f -d postgresql -m template/template.rb
+#sudo chown -R $USER .

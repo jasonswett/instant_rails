@@ -31,9 +31,6 @@ end
 
 template "config/database.yml.tt", "config/database.yml", force: true
 
-copy_file "Dockerfile", "Dockerfile"
-template "docker-compose.yml.tt", "docker-compose.yml", force: true
-
 [
   "bin/setup",
 

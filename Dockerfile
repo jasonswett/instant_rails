@@ -22,7 +22,7 @@ WORKDIR $INSTALL_PATH
 
 RUN gem install rails
 
-#COPY template template
+#COPY ../template template
 #RUN mkdir my_app
 #WORKDIR my_app
 #RUN rails new . -T -d postgresql -m ../template/template.rb
