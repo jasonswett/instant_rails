@@ -26,3 +26,7 @@ Once the script finishes, you can visit `localhost:3000` and see your app runnin
 ## Get help
 
 To get help, just open an issue or email me at jason@codewithjason.com.
+
+## Acknowledgements
+
+This project was inspired in part by Mike Rogers' [Docker/Rails template](https://github.com/Ruby-Starter-Kits/Docker-Rails-Template).
