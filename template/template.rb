@@ -38,6 +38,8 @@ template "config/database.yml.tt", "config/database.yml", force: true
   "app/controllers/static_pages_controller.rb",
   "app/views/static_pages/home.html.erb",
 
+  "config/initializers/rack_mini_profiler.rb",
+
 ].each do |file_path|
   copy_file file_path, file_path, force: true
 end
