@@ -13,6 +13,8 @@ Capybara.register_driver driver do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
 
+Selenium::WebDriver::Chrome.driver_path = "/usr/bin/chromedriver"
+
 Capybara.javascript_driver = driver
 
 RSpec.configure do |config|
