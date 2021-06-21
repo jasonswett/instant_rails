@@ -16,7 +16,8 @@ fill_template init.sql
 
 cp -R ../template template
 
-docker compose run web rails new . \
+docker compose run -e INSTANT_RAILS_APP_NAME=$1 web \
+  rails new . \
   -f \
   -T \
   -d postgresql \
