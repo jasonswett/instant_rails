@@ -1,3 +1,9 @@
+# What Instant Rails is
+
+Instant Rails is a [Rails application template](https://guides.rubyonrails.org/rails_application_templates.html) that comes with certain common tools, like Devise and RSpec, pre-installed.
+
+Instant Rails is also a special kind of Rails application template. Instant Rails will generate your application **inside of a Docker container** so that you don't even need to have Ruby, Rails, PostgreSQL or anything else installed on your computer in order to generate a Rails app.
+
 # How to use Instant Rails
 
 ## Prerequisites
