@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def source_paths
   [__dir__]
 end
@@ -28,7 +30,6 @@ inject_into_file "app/views/layouts/application.html.erb", after: /<body>/ do
 end
 
 template "config/database.yml.tt", "config/database.yml", force: true
-template "docker-compose.yml.tt", "docker-compose.yml", force: true
 
 [
   "bin/setup",
@@ -44,9 +45,8 @@ end
 route "root to: 'static_pages#home'"
 directory "post_templates", "post_templates"
 
-after_bundle do
-  run 'bin/spring stop'
-  generate "devise:install"
-  environment "config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }", env: "development"
-  generate :devise, "User"
-end
+# Skip bundle install
+def run_bundle; end
+
+# Skip yarn install
+def run_webpack; end

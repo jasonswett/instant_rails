@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV["INSTANT_RAILS_APP_NAME"] %>
+  host: 127.0.0.1
+
+development:
+  <<: *default
+  database: <%= ENV["INSTANT_RAILS_APP_NAME"] %>_development
+
+test:
+  <<: *default
+  database: <%= ENV["INSTANT_RAILS_APP_NAME"] %>_test
+
+production:
+  <<: *default
+  database: <%= ENV["INSTANT_RAILS_APP_NAME"] %>_production
+  username: <%= ENV["INSTANT_RAILS_APP_NAME"] %>
+  password:
