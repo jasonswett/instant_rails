@@ -17,4 +17,5 @@ FileUtils.chdir APP_ROOT do
 
   system! "bin/rails db:create"
   system! "bin/rails db:migrate"
+  system! "RAILS_ENV=test bin/rails db:create"
 end
