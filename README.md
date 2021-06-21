@@ -22,3 +22,7 @@ Then run the `init.sh` script.
 This script will create a Rails application and start a Rails server.
 
 Once the script finishes, you can visit `localhost:3000` and see your app running.
+
+## Get help
+
+To get help, just open an issue or email me at jason@codewithjason.com.
