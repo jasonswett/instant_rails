@@ -1,5 +1,5 @@
 ---
-version: '2.4'
+version: "3.8"
 
 x-app: &app
   image: ${app_name}
@@ -43,7 +43,7 @@ services:
       POSTGRES_HOST_AUTH_METHOD: trust
     restart: on-failure
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U ${app_name}"]
       interval: 10s
       timeout: 2s
       retries: 10
