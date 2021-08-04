@@ -1,3 +1,6 @@
+# Use this script by running ./init.sh your_app_name
+# More details at https://www.codewithjason.com/instant-rails/
+
 function fill_template {
   sed -ie "s/\${app_name}/$APP_NAME/" $1
 }
