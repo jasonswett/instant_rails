@@ -26,5 +26,5 @@ docker compose run -e INSTANT_RAILS_APP_NAME=$1 web \
   -d postgresql \
   -m template/template.rb
 
-docker compose run web bin/setup
+docker compose run web bin/initialize
 docker compose up

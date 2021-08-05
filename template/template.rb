@@ -33,6 +33,7 @@ template "config/database.yml.tt", "config/database.yml", force: true
 
 [
   "bin/setup",
+  "bin/initialize",
 
   # Static pages
   "app/controllers/static_pages_controller.rb",
@@ -43,6 +44,8 @@ template "config/database.yml.tt", "config/database.yml", force: true
 ].each do |file_path|
   copy_file file_path, file_path, force: true
 end
+
+run "chmod +x bin/*"
 
 route "root to: 'static_pages#home'"
 directory "post_templates", "post_templates"

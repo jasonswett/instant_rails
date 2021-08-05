@@ -10,6 +10,11 @@ end
 
 FileUtils.chdir APP_ROOT do
   system! "bundle install"
+  system! "bin/rails webpacker:install"
+
+  system! 'bin/rails app:template LOCATION=template/post_templates/devise/template.rb'
+  system! 'bin/rails app:template LOCATION=template/post_templates/rspec/template.rb'
+
   system! "bin/rails db:create"
   system! "bin/rails db:migrate"
   system! "RAILS_ENV=test bin/rails db:create"
