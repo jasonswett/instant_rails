@@ -3,8 +3,7 @@ default: &default
   encoding: unicode
   pool: <%%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV["INSTANT_RAILS_APP_NAME"] %>
-  host: 127.0.0.1
-  port: 5433
+  host: postgres
 
 development:
   <<: *default
