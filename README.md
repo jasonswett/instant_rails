@@ -22,7 +22,7 @@ The only difference you'll notice is that **you'll save a bunch of time and frus
 
 ## Prerequisites
 
-In order to use Instant Rails, you must have Docker installed.
+In order to use Instant Rails, you must have Docker, Ruby and the `rails` gem installed.
 
 ## Usage instructions
 
