@@ -11,11 +11,11 @@ services:
       - "127.0.0.1:5433:5432"
     environment:
       PSQL_HISTFILE: /usr/src/app/log/.psql_history
-      POSTGRES_USER: ${app_name}
+      POSTGRES_USER: <%= @app_name %>
       POSTGRES_HOST_AUTH_METHOD: trust
     restart: on-failure
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${app_name}"]
+      test: ["CMD-SHELL", "pg_isready -U <%= @app_name %>"]
       interval: 10s
       timeout: 2s
       retries: 10
