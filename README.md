@@ -28,20 +28,14 @@ In order to use Instant Rails, you must have Docker, Ruby and the `rails` gem in
 
 ## Usage instructions
 
-First clone the repo.
-
 ```bash
-git clone https://github.com/jasonswett/instant_rails.git
-cd instant_rails
+rails new your_app_name \
+  -T \
+  -d postgresql \
+  -m https://raw.githubusercontent.com/jasonswett/instant_rails/main/template/template.rb
 ```
 
-Then run the `init.sh` script.
-
-```bash
-./init.sh your_app_name
-```
-
-This script will create a Rails application for you. Once the script finishes, you can `cd` into the project directory, run `rails server` and see your app running.
+This command will create a Rails application for you. Once the script finishes, you can `cd` into the project directory, run `rails server` and see your app running.
 
 # Get help
 
