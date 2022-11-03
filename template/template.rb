@@ -4,7 +4,9 @@ def source_paths
   [__dir__]
 end
 
-code = <<-CODE
+code = {}
+
+code["config/database.yml"] = <<-CODE
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -27,9 +29,9 @@ production:
   username: #{@app_name}
   password:
 CODE
-file "config/database.yml", code, force: true
+file "config/database.yml", code["config/database.yml"], force: true
 
-code = <<-CODE
+code["docker-compose.yml"] = <<-CODE
 ---
 version: "3.8"
 
@@ -68,9 +70,9 @@ volumes:
   postgresql:
   redis:
 CODE
-file "docker-compose.yml", code
+file "docker-compose.yml", code["docker-compose.yml"]
 
-template "init.sql.tt", "init.sql"
+file "init.sql", "CREATE USER #{@app_name};"
 
 run "docker compose up -d"
 run "bin/setup"
