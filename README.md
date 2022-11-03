@@ -37,7 +37,7 @@ rails new my_app_name \
   -m https://raw.githubusercontent.com/jasonswett/instant_rails/main/template/template.rb
 ```
 
-This command will create a Rails application for you. Once the script finishes, you can `cd` into the project directory, run `rails server` and see your app running.
+This will create a Rails application for you. Once the script finishes, you can `cd` into the project directory, run `rails server` and see your app running.
 
 # Get help
 
