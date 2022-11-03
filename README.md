@@ -1,5 +1,7 @@
 # Less time installing and troubleshooting, more time building
 
+## What is Instant Rails?
+
 As easy as it is to set up a Rails project, it could be easier.
 
 When you run `rails new`, it does a lot for you, but it doesn't do everything.
