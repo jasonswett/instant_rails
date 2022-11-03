@@ -12,9 +12,6 @@ cd $APP_NAME
 cp ../docker-compose.yml .
 fill_template docker-compose.yml
 
-cp ../init.sql .
-fill_template init.sql
-
 rails new . \
   -f \
   -T \

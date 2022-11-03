@@ -5,3 +5,4 @@ def source_paths
 end
 
 template "config/database.yml.tt", "config/database.yml", force: true
+template "init.sql.tt", "init.sql"
