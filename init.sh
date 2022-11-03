@@ -15,13 +15,11 @@ fill_template docker-compose.yml
 cp ../init.sql .
 fill_template init.sql
 
-cp -R ../template template
-
 rails new . \
   -f \
   -T \
   -d postgresql \
-  -m template/template.rb
+  -m ../template/template.rb
   
 docker compose up -d
 bin/setup
