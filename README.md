@@ -28,8 +28,10 @@ In order to use Instant Rails, you must have Docker, Ruby and the `rails` gem in
 
 ## Usage instructions
 
+To create a new Rails app using Instant Rails, run the following command:
+
 ```bash
-rails new your_app_name \
+rails new my_app_name \
   -T \
   -d postgresql \
   -m https://raw.githubusercontent.com/jasonswett/instant_rails/main/template/template.rb
