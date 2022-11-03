@@ -35,9 +35,3 @@ services:
 volumes:
   postgresql:
   redis:
-  bundler:
-  bootsnap_cache:
-  rails_cache:
-  packs:
-  node_modules:
-  storage:
