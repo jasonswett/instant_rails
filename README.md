@@ -1,10 +1,10 @@
-# What problem does Instant Rails solve?
+# Less time installing and troubleshooting, more time building
 
 As easy as it is to set up a Rails project, it could be easier.
 
 When you run `rails new`, it does a lot for you, but it doesn't do everything.
 
-Rails will install gems for you but it won't install PostgreSQL, Redis, or any other dependencies that you need on your machine but which **don't come in a gem**. You have to manually install those dependencies yourself. And those manual installations can be a pain.
+Rails will install gems for you but it won't install PostgreSQL, Redis, or any other dependencies that you need on your machine but which **don't come in a gem**. You have to manually install those dependencies yourself. And those manual installations can be a pain. ("Can't find libgq-fe.h header", anyone?)
 
 This is the problem that Instant Rails solves. **Instant Rails eliminates the need to manually install your development environment's dependencies.**
 
