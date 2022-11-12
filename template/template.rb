@@ -6,6 +6,17 @@ end
 
 code = {}
 
+code["config/initializers/generators.rb"] = <<-CODE
+Rails.application.config.generators do |g|
+  g.orm :active_record, primary_key_type: :uuid
+  g.stylesheets false
+  g.helper false
+  g.serializer false
+  g.jbuilder false
+end
+CODE
+file "config/initializers/generators.rb", code["config/initializers/generators.rb"], force: true
+
 code["config/database.yml"] = <<-CODE
 default: &default
   adapter: postgresql
