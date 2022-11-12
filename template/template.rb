@@ -8,16 +8,6 @@ def instant_rails_file(filename, content)
   file filename, content, force: true
 end
 
-instant_rails_file "config/initializers/generators.rb", <<-CODE
-Rails.application.config.generators do |g|
-  g.orm :active_record, primary_key_type: :uuid
-  g.stylesheets false
-  g.helper false
-  g.serializer false
-  g.jbuilder false
-end
-CODE
-
 instant_rails_file "config/database.yml", <<-CODE
 default: &default
   adapter: postgresql
