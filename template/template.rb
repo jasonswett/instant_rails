@@ -20,6 +20,10 @@ CODE
 
 gem "paranoia"
 
+gem "audited"
+after_bundle { rails_command("generate audited:install") }
+after_bundle { rails_command("db:migrate") }
+
 instant_rails_file "config/database.yml", <<-CODE
 default: &default
   adapter: postgresql
