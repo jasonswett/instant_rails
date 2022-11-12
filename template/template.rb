@@ -24,6 +24,11 @@ gem "audited"
 after_bundle { rails_command("generate audited:install") }
 after_bundle { rails_command("db:migrate") }
 
+gem "devise"
+after_bundle { rails_command("generate devise:install") }
+after_bundle { rails_command("generate devise users") }
+after_bundle { rails_command("db:migrate") }
+
 instant_rails_file "config/database.yml", <<-CODE
 default: &default
   adapter: postgresql
