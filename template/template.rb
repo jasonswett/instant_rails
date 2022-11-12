@@ -15,6 +15,14 @@ Rails.application.config.generators do |g|
   g.helper false
   g.serializer false
   g.jbuilder false
+
+  g.test_framework :rspec,
+                   fixtures: false,
+                   view_specs: false,
+                   helper_specs: false,
+                   routing_specs: false,
+                   request_specs: false,
+                   controller_specs: false
 end
 CODE
 
@@ -28,6 +36,14 @@ gem "devise"
 after_bundle { rails_command("generate devise:install") }
 after_bundle { rails_command("generate devise users") }
 after_bundle { rails_command("db:migrate") }
+
+gem_group :development, :test do
+  gem "capybara"
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "rspec-rails"
+end
+after_bundle { rails_command("generate rspec:install") }
 
 instant_rails_file "config/database.yml", <<-CODE
 default: &default
