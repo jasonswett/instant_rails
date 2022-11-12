@@ -4,9 +4,11 @@ def source_paths
   [__dir__]
 end
 
-code = {}
+def instant_rails_file(filename, content)
+  file filename, content, force: true
+end
 
-code["config/database.yml"] = <<-CODE
+instant_rails_file "config/database.yml", <<-CODE
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -29,9 +31,8 @@ production:
   username: #{@app_name}
   password:
 CODE
-file "config/database.yml", code["config/database.yml"], force: true
 
-code["docker-compose.yml"] = <<-CODE
+instant_rails_file "docker-compose.yml", <<-CODE
 ---
 version: "3.8"
 
@@ -70,7 +71,6 @@ volumes:
   postgresql:
   redis:
 CODE
-file "docker-compose.yml", code["docker-compose.yml"]
 
 file "init.sql", "CREATE USER #{@app_name};"
 
