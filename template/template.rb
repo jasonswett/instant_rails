@@ -18,6 +18,8 @@ Rails.application.config.generators do |g|
 end
 CODE
 
+gem "paranoia"
+
 instant_rails_file "config/database.yml", <<-CODE
 default: &default
   adapter: postgresql
