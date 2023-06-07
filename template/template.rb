@@ -8,6 +8,10 @@ def instant_rails_file(filename, content)
   file filename, content, force: true
 end
 
+def random_port
+  rand(10_000) + 10_000
+end
+
 instant_rails_file "config/initializers/generators.rb", <<-CODE
 Rails.application.config.generators do |g|
   g.orm :active_record, primary_key_type: :uuid
@@ -26,12 +30,13 @@ Rails.application.config.generators do |g|
 end
 CODE
 
-append_to_file '.gitignore', <<-CODE
-.env
-CODE
+File.open(".gitignore", "a") do |f|
+  f.puts "\n.env"
+end
 
-instant_rails_file ".env", <<-CODE
-DATABASE_HOST=127.0.0.1
+instant_rails_file ".env", <<~CODE
+  DATABASE_HOST=127.0.0.1
+  DATABASE_PORT=#{random_port}
 CODE
 
 gem "paranoia"
@@ -60,8 +65,8 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: #{@app_name}
-  host: 127.0.0.1
-  port: 5434
+  host: <%= ENV.fetch("DATABASE_HOST") %>
+  port: <%= ENV.fetch("DATABASE_PORT") %>
 
 development:
   <<: *default
@@ -89,7 +94,7 @@ services:
       - postgresql:/var/lib/postgresql/data:delegated
       - ./init.sql:/data/application/init.sql
     ports:
-      - "127.0.0.1:5434:5432"
+      - "127.0.0.1:${DATABASE_PORT}:5432"
     environment:
       PSQL_HISTFILE: /usr/src/app/log/.psql_history
       POSTGRES_USER: #{@app_name}
