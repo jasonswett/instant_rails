@@ -37,6 +37,7 @@ end
 instant_rails_file ".env", <<~CODE
   DATABASE_HOST=127.0.0.1
   DATABASE_PORT=#{random_port}
+  REDIS_PORT=#{random_port}
 CODE
 
 gem "paranoia"
@@ -113,7 +114,7 @@ services:
     volumes:
       - redis:/data:delegated
     ports:
-      - "127.0.0.1:6381:6379"
+      - "127.0.0.1:${REDIS_PORT}:6379"
     restart: on-failure
     logging:
       driver: none
