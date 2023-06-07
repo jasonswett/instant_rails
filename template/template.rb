@@ -26,6 +26,14 @@ Rails.application.config.generators do |g|
 end
 CODE
 
+append_to_file '.gitignore', <<-CODE
+.env
+CODE
+
+instant_rails_file ".env", <<-CODE
+DATABASE_HOST=127.0.0.1
+CODE
+
 gem "paranoia"
 
 gem "audited"
@@ -38,6 +46,7 @@ after_bundle { rails_command("generate devise users") }
 after_bundle { rails_command("db:migrate") }
 
 gem_group :development, :test do
+  gem "dotenv-rails"
   gem "capybara"
   gem "factory_bot_rails"
   gem "faker"
@@ -52,7 +61,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: #{@app_name}
   host: 127.0.0.1
-  port: 5433
+  port: 5434
 
 development:
   <<: *default
@@ -80,7 +89,7 @@ services:
       - postgresql:/var/lib/postgresql/data:delegated
       - ./init.sql:/data/application/init.sql
     ports:
-      - "127.0.0.1:5433:5432"
+      - "127.0.0.1:5434:5432"
     environment:
       PSQL_HISTFILE: /usr/src/app/log/.psql_history
       POSTGRES_USER: #{@app_name}
@@ -99,7 +108,7 @@ services:
     volumes:
       - redis:/data:delegated
     ports:
-      - "127.0.0.1:6380:6379"
+      - "127.0.0.1:6381:6379"
     restart: on-failure
     logging:
       driver: none
