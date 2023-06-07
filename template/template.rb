@@ -26,6 +26,14 @@ Rails.application.config.generators do |g|
 end
 CODE
 
+instant_rails_file ".gitignore", <<-CODE
+.env
+CODE
+
+instant_rails_file ".env", <<-CODE
+DATABASE_HOST=127.0.0.1
+CODE
+
 gem "paranoia"
 
 gem "audited"
@@ -38,6 +46,7 @@ after_bundle { rails_command("generate devise users") }
 after_bundle { rails_command("db:migrate") }
 
 gem_group :development, :test do
+  gem "dotenv-rails"
   gem "capybara"
   gem "factory_bot_rails"
   gem "faker"
